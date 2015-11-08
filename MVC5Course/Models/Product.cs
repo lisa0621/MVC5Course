@@ -24,7 +24,7 @@ namespace MVC5Course.Models
         public int ProductId { get; set; }
 
         [Required]
-        [StringLength(10)]
+        [StringLength(50)]
         public string ProductName { get; set; }
 
         [Required]

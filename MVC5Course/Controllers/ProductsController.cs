@@ -54,9 +54,41 @@ namespace MVC5Course.Controllers
                            Price = p.Price
                        };
 
-            
-            return View(data1);
+            var data3 = db.Product.AsQueryable();
+            data3.Where(x => x.ProductId <10);
 
+            return View(data3);
+
+        }
+
+        public ActionResult BatchUpdate()
+        {
+            var data = db.Product.Where(x => x.ProductId < 10);
+            foreach (var item in data)
+            {
+                item.Price = 5;
+            }
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbEntityValidationException ex)
+            {
+                //throw ex;
+                var allErrors = new List<string>();
+
+                foreach (DbEntityValidationResult re in ex.EntityValidationErrors)
+                {
+                    foreach (DbValidationError err in re.ValidationErrors)
+                    {
+                        allErrors.Add(err.ErrorMessage);
+                    }
+                }
+
+                ViewBag.Errors = allErrors;
+            }
+
+            return RedirectToAction("Index");
         }
 
         // GET: Products/Details/5
@@ -168,17 +200,18 @@ namespace MVC5Course.Controllers
         public string TestInsert()
         {
             var db = new FabricsEntities();
-            db.Product.Add(new Product()
+            var prod = new Product()
             {
                 ProductName = "EF",
                 Price = 99,
                 Stock = 5,
                 Active = true
-            });
+            };
+            db.Product.Add(prod);
 
             db.SaveChanges();
 
-            return "OK";
+            return "OK: "+prod.ProductId;
         }
 
         public ActionResult NewProduct()
