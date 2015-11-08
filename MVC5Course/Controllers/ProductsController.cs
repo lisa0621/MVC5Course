@@ -16,8 +16,39 @@ namespace MVC5Course.Controllers
     {
         private FabricsEntities db = new FabricsEntities();
 
+
+        //// GET: Products
+        //public ActionResult Index(string search)
+        //{
+        //    var data = db.Product.AsQueryable();
+
+        //    data = data.
+        //            Where(p => p.ProductId < 10);
+
+        //    if (!String.IsNullOrEmpty(search))
+        //    {
+        //        data = data.Where(p => p.ProductName.Contains(search));
+        //    }
+
+        //    var data1 = from p in db.Product
+        //                where p.ProductName.Contains("100")
+        //                orderby p.ProductName
+        //                select p;
+
+        //    var data2 = from p in db.Product
+        //                where p.ProductName.Contains("100")
+        //                orderby p.ProductName
+        //                select new NewProductVM
+        //                {
+        //                    ProductName = p.ProductName,
+        //                    Price = p.Price
+        //                };
+
+        //    return View(data);
+        //}
+
         // GET: Products
-        public ActionResult Index()
+        public ActionResult Index(string search)
         {
             //return View(db.Product.ToList());
             //var data = db.Product
@@ -35,9 +66,9 @@ namespace MVC5Course.Controllers
             //data.OrderBy(p => p.ProductName);
 
             var data1 = from p in db.Product
-                       where p.ProductName.Contains("100")
-                       orderby p.ProductName
-                       select p;
+                        where p.ProductName.Contains("100")
+                        orderby p.ProductName
+                        select p;
 
 
             //馬上取回來
@@ -46,18 +77,27 @@ namespace MVC5Course.Controllers
 
             //輸出轉型別
             var data2 = from p in db.Product
-                       where p.ProductName.Contains("100")
-                       orderby p.ProductName
-                       select new NewProductVM
-                       {
-                           ProductName = p.ProductName,
-                           Price = p.Price
-                       };
+                        where p.ProductName.Contains("100")
+                        orderby p.ProductName
+                        select new NewProductVM
+                        {
+                            ProductName = p.ProductName,
+                            Price = p.Price
+                        };
 
             var data3 = db.Product.AsQueryable();
-            data3.Where(x => x.ProductId <10);
+            data3.Where(x => x.ProductId < 10);
 
-            return View(data3);
+
+            var data4 = db.Product.AsQueryable();
+
+            if (!String.IsNullOrEmpty(search))
+            {
+                data4 = data4.Where(x => x.ProductName.Contains(search));
+            }
+
+
+            return View(data4);
 
         }
 
