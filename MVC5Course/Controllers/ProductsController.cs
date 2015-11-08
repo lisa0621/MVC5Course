@@ -124,6 +124,22 @@ namespace MVC5Course.Controllers
             base.Dispose(disposing);
         }
 
+        public string TestInsert()
+        {
+            var db = new FabricsEntities();
+            db.Product.Add(new Product()
+            {
+                ProductName = "EF",
+                Price = 99,
+                Stock = 5,
+                Active = true
+            });
+
+            db.SaveChanges();
+
+            return "OK";
+        }
+
         public ActionResult NewProduct()
         {
             return View();
@@ -132,6 +148,20 @@ namespace MVC5Course.Controllers
         [HttpPost]
         public ActionResult NewProduct(NewProductVM product)
         {
+            if (ModelState.IsValid)
+            {
+                var prod = new Product();
+
+                prod.ProductName = product.ProductName;
+                prod.Price = product.ProductPrice;
+                prod.Stock = 10;
+                prod.Active = true;
+
+                db.Product.Add(prod);
+                db.SaveChanges();
+
+                return RedirectToAction("Index");
+            }
             return View(product);
         }
     }
