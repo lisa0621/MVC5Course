@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using MVC5Course.Models;
 using System.Data.Entity.Validation;
+using Omu.ValueInjecter;
 
 namespace MVC5Course.Controllers
 {
@@ -18,7 +19,44 @@ namespace MVC5Course.Controllers
         // GET: Products
         public ActionResult Index()
         {
-            return View(db.Product.ToList());
+            //return View(db.Product.ToList());
+            //var data = db.Product
+            //    .Where(x => x.ProductName.Contains("100"))
+            //    .OrderBy(p => p.ProductName);
+
+
+            //var data = db.Product.AsQueryable();
+            //data.Where(x => x.ProductName.Contains("100"));
+
+            //if (true)
+            //{
+            //    data.Where(p => p.Active == true);
+            //}
+            //data.OrderBy(p => p.ProductName);
+
+            var data1 = from p in db.Product
+                       where p.ProductName.Contains("100")
+                       orderby p.ProductName
+                       select p;
+
+
+            //馬上取回來
+            data1.ToList();
+
+
+            //輸出轉型別
+            var data2 = from p in db.Product
+                       where p.ProductName.Contains("100")
+                       orderby p.ProductName
+                       select new NewProductVM
+                       {
+                           ProductName = p.ProductName,
+                           Price = p.Price
+                       };
+
+            
+            return View(data1);
+
         }
 
         // GET: Products/Details/5
@@ -28,7 +66,9 @@ namespace MVC5Course.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Product.Find(id);
+            //Product product = db.Product.Find(id);
+            //Product product = db.Product.Where(x => x.ProductId == id).FirstOrDefault();
+            Product product = db.Product.FirstOrDefault(x => x.ProductId == id);
             if (product == null)
             {
                 return HttpNotFound();
@@ -151,10 +191,13 @@ namespace MVC5Course.Controllers
         {
             if (ModelState.IsValid)
             {
-                var prod = new Product();
+                //var prod = new Product();
+                //prod.ProductName = product.ProductName;
+                //prod.Price = product.ProductPrice;
+                //prod.Stock = 10;
+                //prod.Active = true;
 
-                prod.ProductName = product.ProductName;
-                prod.Price = product.ProductPrice;
+                var prod = Mapper.Map<Product>(product);
                 prod.Stock = 10;
                 prod.Active = true;
 

@@ -9,11 +9,11 @@ namespace MVC5Course.Models
     public class NewProductVM
     {
         [Required]
-        [StringLength(20)]
+        [StringLength(10)]
         public string ProductName { get; set; }
 
         [Required]
         [Range(1.0, 9999.9)]
-        public decimal ProductPrice { get; set; }
+        public Nullable<decimal> Price { get; set; }
     }
 }
