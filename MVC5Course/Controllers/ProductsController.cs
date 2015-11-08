@@ -63,6 +63,9 @@ namespace MVC5Course.Controllers
 
         public ActionResult BatchUpdate()
         {
+
+            //db.Database.ExecuteSqlCommand("UPDATE dbo.Product SET Price=5 WHERE ProductId < @p0", 10);
+
             var data = db.Product.Where(x => x.ProductId < 10);
             foreach (var item in data)
             {
@@ -74,18 +77,18 @@ namespace MVC5Course.Controllers
             }
             catch (DbEntityValidationException ex)
             {
-                //throw ex;
-                var allErrors = new List<string>();
+                throw ex;
+                //var allErrors = new List<string>();
 
-                foreach (DbEntityValidationResult re in ex.EntityValidationErrors)
-                {
-                    foreach (DbValidationError err in re.ValidationErrors)
-                    {
-                        allErrors.Add(err.ErrorMessage);
-                    }
-                }
+                //foreach (DbEntityValidationResult re in ex.EntityValidationErrors)
+                //{
+                //    foreach (DbValidationError err in re.ValidationErrors)
+                //    {
+                //        allErrors.Add(err.ErrorMessage);
+                //    }
+                //}
 
-                ViewBag.Errors = allErrors;
+                //ViewBag.Errors = allErrors;
             }
 
             return RedirectToAction("Index");
@@ -183,6 +186,17 @@ namespace MVC5Course.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Product product = db.Product.Find(id);
+
+            //var orderLines = db.OrderLine.Where(p => p.ProductId == id);
+            //var orderLines = product.OrderLine.ToList();
+            //foreach (var item in orderLines)
+            //{
+            //    db.OrderLine.Remove(item);
+            //}
+
+            //一次刪掉多筆
+            db.OrderLine.RemoveRange(product.OrderLine);
+
             db.Product.Remove(product);
             db.SaveChanges();
             return RedirectToAction("Index");
