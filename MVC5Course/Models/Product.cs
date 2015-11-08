@@ -29,6 +29,7 @@ namespace MVC5Course.Models
 
         [Required]
         [Range(1.0,99.9)]
+        [DisplayFormat(DataFormatString ="{0:C}")]
         public Nullable<decimal> Price { get; set; }
 
         [Required]

@@ -123,5 +123,16 @@ namespace MVC5Course.Controllers
             }
             base.Dispose(disposing);
         }
+
+        public ActionResult NewProduct()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult NewProduct(NewProductVM product)
+        {
+            return View(product);
+        }
     }
 }
