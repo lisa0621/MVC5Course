@@ -18,6 +18,10 @@
     }
 </p>*@
 
+<p class="text-right">
+       @Html.ActionLink("test", "ABC", new { id = 123 })
+</p>
+
 @using (Html.BeginForm())
 {
     <input type="search" name="search" value="" placeholder="請輸入關鍵字" />

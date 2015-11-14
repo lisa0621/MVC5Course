@@ -13,11 +13,69 @@ namespace MVC5Course
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            //routes.MapRoute(
+            //    name: "PHPext",
+            //    url: "{controller}-{action}-{id}",
+            //    defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+            //);
+
+            //routes.MapRoute(
+            //    name: "MyHome",
+            //    url: "MyHome/{action}/{id}",
+            //    defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
+            //    constraints: new
+            //    {
+            //        id = @"\d{3,}"
+            //    }
+            //);
+
+            //routes.MapRoute(
+            //    name: "Products",
+            //    url: "{controller}/{action}/{id}",
+            //    defaults: new
+            //    {
+            //        controller = "Products",
+            //        action = "Index",
+            //        id = UrlParameter.Optional
+            //    },
+            //    constraints: new
+            //    {
+            //        controller = "{Products}|{Clients}|{OrderLine}",
+            //        id = @"\d*"
+            //    }
+            //);
+
+            routes.MapRoute(
+                name: "Products",
+                url: "{controller}/{action}/{id}",
+                defaults: new
+                {
+                    controller = "Products",
+                    action = "Index",
+                    id = UrlParameter.Optional
+                },
+                constraints: new
+                {
+                    controller = "Products",
+                    id = @"\d*"
+                }
+            );
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                defaults: new
+                {
+                    controller = "Home",
+                    action = "Index",
+                    id = UrlParameter.Optional
+                },
+                constraints: new
+                {
+                    controller = "(?!^Products$).*"
+                }
             );
+           
         }
     }
 }
