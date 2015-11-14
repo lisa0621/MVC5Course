@@ -14,7 +14,7 @@ namespace MVC5Course.Controllers
 {
     public class ProductsController : Controller
     {
-        private FabricsEntities db = new FabricsEntities();
+        //private FabricsEntities db = new FabricsEntities();
 
         ProductRepository repo = RepositoryHelper.GetProductRepository();
 
@@ -126,7 +126,8 @@ namespace MVC5Course.Controllers
             }
             try
             {
-                db.SaveChanges();
+                //db.SaveChanges();
+                repo.UnitOfWork.Commit();
             }
             catch (DbEntityValidationException ex)
             {
@@ -181,8 +182,9 @@ namespace MVC5Course.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Product.Add(product);
-                db.SaveChanges();
+                repo.Add(product);
+                //db.SaveChanges();
+                repo.UnitOfWork.Commit();
                 return RedirectToAction("Index");
             }
 
@@ -214,8 +216,11 @@ namespace MVC5Course.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(product).State = EntityState.Modified;
-                db.SaveChanges();
+                //db.Entry(product).State = EntityState.Modified;
+                (repo.UnitOfWork.Context).Entry(product).State = EntityState.Modified;
+
+                //db.SaveChanges();
+                repo.UnitOfWork.Commit();
                 return RedirectToAction("Index");
             }
             return View(product);
@@ -253,10 +258,13 @@ namespace MVC5Course.Controllers
             //}
 
             //一次刪掉多筆
-            db.OrderLine.RemoveRange(product.OrderLine);
+            //db.OrderLine.RemoveRange(product.OrderLine);
 
-            db.Product.Remove(product);
-            db.SaveChanges();
+            //db.Product.Remove(product);
+            repo.Delete(product);
+
+            //db.SaveChanges();
+            repo.UnitOfWork.Commit();
             return RedirectToAction("Index");
         }
 
@@ -264,7 +272,8 @@ namespace MVC5Course.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                //db.Dispose();
+                repo.UnitOfWork.Context.Dispose();
             }
             base.Dispose(disposing);
         }
@@ -306,10 +315,11 @@ namespace MVC5Course.Controllers
                 prod.Stock = 10;
                 prod.Active = true;
 
-                db.Product.Add(prod);
+                repo.Add(prod);
                 try
                 {
-                    db.SaveChanges();
+                    //db.SaveChanges();
+                    repo.UnitOfWork.Commit();
                 }
                 catch (DbEntityValidationException ex)
                 {
