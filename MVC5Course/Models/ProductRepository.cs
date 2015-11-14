@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Linq;
 using System.Collections.Generic;
 	
@@ -6,9 +6,14 @@ namespace MVC5Course.Models
 {   
 	public  class ProductRepository : EFRepository<Product>, IProductRepository
 	{
-        public IQueryable<Product> Get¨ú±o«e­±10µ§½d¨Ò¸ê®Æ()
+        public IQueryable<Product> Getå–å¾—å‰é¢10ç­†ç¯„ä¾‹è³‡æ–™()
         {
             return this.All().Where(p => p.ProductId < 10);
+        }
+
+        public Product GetByID(int? id)
+        {
+            return this.All().FirstOrDefault(p => p.ProductId == id.Value);
         }
 
 	}

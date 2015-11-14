@@ -156,7 +156,9 @@ namespace MVC5Course.Controllers
             }
             //Product product = db.Product.Find(id);
             //Product product = db.Product.Where(x => x.ProductId == id).FirstOrDefault();
-            Product product = db.Product.FirstOrDefault(x => x.ProductId == id);
+            //Product product = db.Product.FirstOrDefault(x => x.ProductId == id);
+            Product product = repo.GetByID(id);
+
             if (product == null)
             {
                 return HttpNotFound();
@@ -194,7 +196,8 @@ namespace MVC5Course.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Product.Find(id);
+            //Product product = db.Product.Find(id);
+            Product product = repo.GetByID(id);
             if (product == null)
             {
                 return HttpNotFound();
@@ -225,7 +228,8 @@ namespace MVC5Course.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Product.Find(id);
+            //Product product = db.Product.Find(id);
+            Product product = repo.GetByID(id);
             if (product == null)
             {
                 return HttpNotFound();
@@ -238,7 +242,8 @@ namespace MVC5Course.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Product product = db.Product.Find(id);
+            //Product product = db.Product.Find(id);
+            Product product = repo.GetByID(id);
 
             //var orderLines = db.OrderLine.Where(p => p.ProductId == id);
             //var orderLines = product.OrderLine.ToList();
