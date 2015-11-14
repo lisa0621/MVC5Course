@@ -16,6 +16,8 @@ namespace MVC5Course.Controllers
     {
         private FabricsEntities db = new FabricsEntities();
 
+        ProductRepository repo = RepositoryHelper.GetProductRepository();
+
         //// GET: Products
         //public ActionResult Index(string search)
         //{
@@ -64,39 +66,49 @@ namespace MVC5Course.Controllers
             //}
             //data.OrderBy(p => p.ProductName);
 
-            var data1 = from p in db.Product
-                        where p.ProductName.Contains("100")
-                        orderby p.ProductName
-                        select p;
+
+            //var data1 = from p in db.Product
+            //            where p.ProductName.Contains("100")
+            //            orderby p.ProductName
+            //            select p;
 
 
-            //馬上取回來
-            data1.ToList();
+            ////馬上取回來
+            //data1.ToList();
 
 
-            //輸出轉型別
-            var data2 = from p in db.Product
-                        where p.ProductName.Contains("100")
-                        orderby p.ProductName
-                        select new NewProductVM
-                        {
-                            ProductName = p.ProductName,
-                            Price = p.Price
-                        };
+            ////輸出轉型別
+            //var data2 = from p in db.Product
+            //            where p.ProductName.Contains("100")
+            //            orderby p.ProductName
+            //            select new NewProductVM
+            //            {
+            //                ProductName = p.ProductName,
+            //                Price = p.Price
+            //            };
 
-            var data3 = db.Product.AsQueryable();
-            data3.Where(x => x.ProductId < 10);
+            //var data3 = db.Product.AsQueryable();
+            //data3.Where(x => x.ProductId < 10);
 
 
-            var data4 = db.Product.AsQueryable();
+            //var data4 = db.Product.AsQueryable();
+
+            //if (!String.IsNullOrEmpty(search))
+            //{
+            //    data4 = data4.Where(x => x.ProductName.Contains(search));
+            //}
+
+            
+            //var data = db.Product.Where(x => x.ProductId < 10);
+            //var data = repo.Where(x => x.ProductId < 10);
+            var data = repo.Get取得前面10筆範例資料();
 
             if (!String.IsNullOrEmpty(search))
             {
-                data4 = data4.Where(x => x.ProductName.Contains(search));
+                data = data.Where(x => x.ProductName.Contains(search));
             }
 
-
-            return View(data4);
+            return View(data);
 
         }
 
@@ -105,7 +117,9 @@ namespace MVC5Course.Controllers
 
             //db.Database.ExecuteSqlCommand("UPDATE dbo.Product SET Price=5 WHERE ProductId < @p0", 10);
 
-            var data = db.Product.Where(x => x.ProductId < 10);
+            //var data = db.Product.Where(x => x.ProductId < 10);
+            var data = repo.Get取得前面10筆範例資料();
+
             foreach (var item in data)
             {
                 item.Price = 5;
