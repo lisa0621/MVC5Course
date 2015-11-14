@@ -33,5 +33,23 @@ namespace MVC5Course.Controllers
 
             return View(data);
         }
+
+        public ActionResult SimpleBinding(int p1 = 1, string p2 = "", double p3 = 0)
+        {
+            return Content(p1+" "+ p2+" "+p3);
+        }
+
+        public ActionResult FormBinding()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult FormBinding(double Price, FormCollection form)
+        {
+            //form["Price"]
+
+            return View();
+        }
     }
 }

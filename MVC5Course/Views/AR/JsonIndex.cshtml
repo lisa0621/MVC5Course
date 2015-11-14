@@ -22,6 +22,7 @@
 </table>
 
 <script>
+
     function MainCtrl($scope) {
         window.GetData = function () {
             $.post('AR/JsonData', "", function (data) {
@@ -33,7 +34,7 @@
     }
 
     function GetData(){
-        $.post('AR/JsonData', "", function (data) {
+        $.post('/AR/JsonData', "", function (data) {
             console.log(data);
         });
     }
