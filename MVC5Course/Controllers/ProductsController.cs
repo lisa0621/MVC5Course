@@ -16,7 +16,6 @@ namespace MVC5Course.Controllers
     {
         private FabricsEntities db = new FabricsEntities();
 
-
         //// GET: Products
         //public ActionResult Index(string search)
         //{
