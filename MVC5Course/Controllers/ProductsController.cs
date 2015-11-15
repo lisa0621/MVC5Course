@@ -117,18 +117,6 @@ namespace MVC5Course.Controllers
         //public ActionResult Index(int[] ProductId, Product[] data)
         public ActionResult Index(int[] ProductId, IList<Product> data)
         {
-            //if (search != null) {
-
-            //    var data1 = repo.Get取得前面10筆範例資料();
-
-            //    if (!String.IsNullOrEmpty(search))
-            //    {
-            //        data1 = data1.Where(x => x.ProductName.Contains(search));
-            //    }
-
-            //    return View(data1);
-            //}
-
             if (ModelState.IsValid)
             {
                 if (data != null)
