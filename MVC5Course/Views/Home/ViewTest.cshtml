@@ -1,11 +1,12 @@
 ﻿@model int[]
-@*@{ 
+@{ 
     Layout = "";
 
     var i = 0;
 
     @:數值: @i
-}*@
+    var s = " ";
+}
 
 @Model
 
@@ -16,16 +17,19 @@ ex:12345
     @item;
 }
 
-var s = " ";
-@foreach (var item in Model)
-{
-    @item @s
-}
+
+
 
 ex:1 2 3 4 5
 
 @foreach (var item in Model)
 {<text>@item </text>}
+
+
+@foreach (var item in Model)
+{
+    @item @s
+}
 
 
 ex:
