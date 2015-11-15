@@ -258,6 +258,7 @@ namespace MVC5Course.Controllers
             if (TryUpdateModel<Product>(product, includeProperties))
             //if (ModelState.IsValid)
             {
+                //這種寫法很危險
                 //db.Entry(product).State = EntityState.Modified;
                 //(repo.UnitOfWork.Context).Entry(product).State = EntityState.Modified;
 
