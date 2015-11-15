@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using MVC5Course.Models;
 using System.Data.Entity.Validation;
 using Omu.ValueInjecter;
+using System.Web.UI;
 
 namespace MVC5Course.Controllers
 {
@@ -49,6 +50,7 @@ namespace MVC5Course.Controllers
         //}
 
         // GET: Products
+        [OutputCache(Location = OutputCacheLocation.Server, Duration = 60)]
         public ActionResult Index(string search)
         {
             //return View(db.Product.ToList());
@@ -112,7 +114,6 @@ namespace MVC5Course.Controllers
 
         }
 
-
         [HttpPost]
         //public ActionResult Index(int[] ProductId, Product[] data)
         //public ActionResult Index(int[] ProductId, IList<Product> data)
@@ -121,9 +122,9 @@ namespace MVC5Course.Controllers
 
             IList<Product> data = new List<Product>();
 
-            if (TryUpdateModel <IList<Product>>(data, "data"))
+            if (TryUpdateModel<IList<Product>>(data, "data"))
             {
-           
+
                 if (data != null)
                 {
                     foreach (var item in data)
@@ -146,7 +147,12 @@ namespace MVC5Course.Controllers
                 return RedirectToAction("Index");
             }
 
-            return View();
+            //清除Post資料
+            //ModelState.Clear();
+
+            ModelState.AddModelError("data[0].Price", "ERROR");
+            //ModelState 會留下Post資料
+            return View(repo.Get取得前面10筆範例資料());
         }
 
         public ActionResult BatchUpdate()
@@ -250,6 +256,7 @@ namespace MVC5Course.Controllers
         // 詳細資訊，請參閱 http://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
+        //[ValidateInput(false)]
         public ActionResult Edit(int? id, FormCollection form)
         //public ActionResult Edit([Bind(Include = "ProductId,ProductName,Price,Active,Stock")] Product product)
         {

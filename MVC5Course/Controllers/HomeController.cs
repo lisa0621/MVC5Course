@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MVC5Course.ActionFilters;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -28,10 +29,14 @@ namespace MVC5Course.Controllers
             return View();
         }
 
+        [MyFilter]
         public ActionResult Test()
         {
+            System.Diagnostics.Debug.WriteLine("Test Action");
             return View();
         }
+
+
 
     }
 }
