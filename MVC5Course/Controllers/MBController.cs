@@ -58,7 +58,9 @@ namespace MVC5Course.Controllers
         /// <param name="data"></param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult FormBinding(Product data)
+        public ActionResult FormBinding(
+            [Bind(Exclude ="Active")]
+            Product data)
         {
             //form["Price"]
 
@@ -70,11 +72,29 @@ namespace MVC5Course.Controllers
             return View();
         }
 
+        /// <summary>
+        /// 綁定多筆 透過命名空間概念去區隔同型別
+        /// </summary>
+        /// <param name="data1"></param>
+        /// <param name="data2"></param>
+        /// <returns></returns>
+        //[HttpPost]
+        //public ActionResult MultBinding(Product data1, Product data2)
+        //{
+        //    ViewBag.data1 = data1;
+        //    ViewBag.data2 = data2;
+
+        //    return View();
+        //}
+
+
         [HttpPost]
-        public ActionResult MultBinding(Product data1, Product data2)
+        public ActionResult MultBinding(Product data1, [Bind(Prefix ="data3")]Product data2)
         {
+            ViewBag.data1 = data1;
+            ViewBag.data2 = data2;
+
             return View();
         }
-
     }
 }
