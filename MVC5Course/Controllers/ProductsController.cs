@@ -114,11 +114,14 @@ namespace MVC5Course.Controllers
 
         }
 
+        //自訂錯誤頁面
+        [HandleError(ExceptionType = typeof(DbEntityValidationException), View = "Error_DbEntityValidationException")]
         [HttpPost]
         //public ActionResult Index(int[] ProductId, Product[] data)
         //public ActionResult Index(int[] ProductId, IList<Product> data)
         public ActionResult Index(int[] ProductId, FormCollection form)
         {
+            throw new DbEntityValidationException();
 
             IList<Product> data = new List<Product>();
 

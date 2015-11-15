@@ -7,7 +7,7 @@ using System.Web.Mvc;
 
 namespace MVC5Course.ActionFilters
 {
-    public class MyFilterAttribute : ActionFilterAttribute
+    public class MyFilterAttribute : ActionFilterAttribute, IAuthorizationFilter
     {
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
@@ -32,6 +32,11 @@ namespace MVC5Course.ActionFilters
         {
             Debug.WriteLine("4");
             base.OnResultExecuted(filterContext);
+        }
+
+        public void OnAuthorization(AuthorizationContext filterContext)
+        {
+            //throw new NotImplementedException();
         }
     }
 }
