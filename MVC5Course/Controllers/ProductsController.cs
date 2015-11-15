@@ -189,6 +189,8 @@ namespace MVC5Course.Controllers
                 //}
 
                 //ViewBag.Errors = allErrors;
+                //顯示自訂訊息
+                throw ex;
             }
 
             return RedirectToAction("Index");
