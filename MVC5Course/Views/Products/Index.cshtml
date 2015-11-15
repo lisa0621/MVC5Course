@@ -32,71 +32,77 @@
 {
 
 
-<table class="table">
-    <tr>
-        <th>
-            V
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ProductName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Price)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Active)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Stock)
-        </th>
-        <th></th>
-    </tr>
+    <table class="table">
+        <tr>
+            <th>
+                V
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Active)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Stock)
+            </th>
+            <th></th>
+        </tr>
+        @{
+            var data = Model.ToArray();
 
-@foreach (var item in Model)
-{
-    <tr>
-        <td>
-            <input type="checkbox" name="ProductId" value="@item.ProductId" />
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProductName)
-        </td>
-        <td>
-            @*NT$ @String.Format("{0:C}", item.Price)
-            NT$ @String.Format("{0:0.0}", item.Price)*@
-            @Html.DisplayFor(modelItem => item.Price)
-        </td>
-        <td>
-            @*@Html.DisplayFor(modelItem => item.Active)*@
-            @*@if (item.Active.Value)
-            {
-                @:啟用
+        }
+        @for (var i = 0; i < data.Length ; i++)
+        {
+
+            <tr>
+                <td>
+                    <input type="checkbox" name="ProductId" value="@data[i].ProductId" />
+                </td>
+                <td>
+                    @Html.HiddenFor(modelItem => data[i].ProductId)
+                    @Html.EditorFor(modelItem => data[i].ProductName)
+                </td>
+                <td>
+                    @*NT$ @String.Format("{0:C}", data[i].Price)
+                        NT$ @String.Format("{0:0.0}", data[i].Price)*@
+                    @Html.EditorFor(modelItem => data[i].Price)
+                </td>
+                <td>
+                    @*@Html.DisplayFor(modelItem => data[i].Active)*@
+                    @*@if (data[i].Active.Value)
+                        {
+                            @:啟用
+                        }
+                        else
+                        {
+                            @:停用
+                        }*@
+                    @(data[i].Active.Value ? "啟用" : "停用")
+                </td>
+                <td>
+                    @Html.EditorFor(modelItem => data[i].Stock)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = data[i].ProductId }) |
+                    @Html.ActionLink("Details", "Details", new { id = data[i].ProductId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = data[i].ProductId })
+                </td>
+            </tr>
+        }
+        
+        <tr>
+            <td><button type="submit">批次作業</button></td>
+            <td></td>
+            <td><a href="@Url.Action("BatchUpdate")" class="btn">更新價格為5元</a></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+
+    </table>
+
             }
-            else
-            {
-                @:停用
-            }*@
-            @(item.Active.Value ? "啟用" : "停用")
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Stock)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.ProductId }) |
-            @Html.ActionLink("Details", "Details", new { id = item.ProductId }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.ProductId })
-        </td>
-    </tr>
-}
-    <tr>
-        <td><button type="submit">刪除</button></td>
-        <td></td>
-        <td><a href="@Url.Action("BatchUpdate")" class="btn">更新價格為5元</a></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-
-</table>
-
-}

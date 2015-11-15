@@ -114,14 +114,31 @@ namespace MVC5Course.Controllers
 
 
         [HttpPost]
-        public ActionResult Index(int[] ProductId)
+        //public ActionResult Index(int[] ProductId, Product[] data)
+        public ActionResult Index(int[] ProductId, IList<Product> data)
         {
-            foreach (var id in ProductId)
+            if (ModelState.IsValid)
             {
-                repo.Delete(repo.GetByID(id));
-            }
+                if (data != null)
+                {
+                    foreach (var item in data)
+                    {
+                        var dbItem = repo.GetByID(item.ProductId);
 
-            repo.UnitOfWork.Commit();
+                        dbItem.InjectFrom(item);
+                    }
+                }
+                if (ProductId != null)
+                {
+
+                    foreach (var id in ProductId)
+                    {
+                        repo.Delete(repo.GetByID(id));
+                    }
+                }
+
+                repo.UnitOfWork.Commit();
+            }
 
             return RedirectToAction("Index");
         }
