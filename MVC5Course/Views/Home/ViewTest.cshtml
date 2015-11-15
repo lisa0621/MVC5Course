@@ -16,10 +16,16 @@ ex:12345
     @item;
 }
 
-ex:1  2  3  4  5
+var s = " ";
+@foreach (var item in Model)
+{
+    @item @s
+}
+
+ex:1 2 3 4 5
 
 @foreach (var item in Model)
-{<text>@item</text>  }
+{<text>@item </text>}
 
 
 ex:
