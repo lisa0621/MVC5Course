@@ -22,7 +22,7 @@
        @Html.ActionLink("test", "ABC", new { id = 123 })
 </p>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Index","Products",FormMethod.Get))
 {
     <input type="search" name="search" value="" placeholder="請輸入關鍵字" />
     <input type="submit" value="搜尋" />
