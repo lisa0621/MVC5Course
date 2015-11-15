@@ -44,12 +44,25 @@ namespace MVC5Course.Controllers
             return View();
         }
 
+        //[HttpPost]
+        //public ActionResult FormBinding(double Price, FormCollection form)
+        //{
+        //    //form["Price"]
+
+        //    return View();
+        //}
+
+        /// <summary>
+        /// 強型別
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
         [HttpPost]
-        public ActionResult FormBinding(double Price, FormCollection form)
+        public ActionResult FormBinding(Product data)
         {
             //form["Price"]
 
-            return View();
+            return Json(data);
         }
     }
 }
