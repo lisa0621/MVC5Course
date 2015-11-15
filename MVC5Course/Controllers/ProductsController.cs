@@ -112,6 +112,20 @@ namespace MVC5Course.Controllers
 
         }
 
+
+        [HttpPost]
+        public ActionResult Index(int[] ProductId)
+        {
+            foreach (var id in ProductId)
+            {
+                repo.Delete(repo.GetByID(id));
+            }
+
+            repo.UnitOfWork.Commit();
+
+            return RedirectToAction("Index");
+        }
+
         public ActionResult BatchUpdate()
         {
 

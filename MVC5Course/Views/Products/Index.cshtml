@@ -28,8 +28,15 @@
     <input type="submit" value="搜尋" />
 }
 
+@using (Html.BeginForm())
+{
+
+
 <table class="table">
     <tr>
+        <th>
+            V
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.ProductName)
         </th>
@@ -45,8 +52,12 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+@foreach (var item in Model)
+{
     <tr>
+        <td>
+            <input type="checkbox" name="ProductId" value="@item.ProductId" />
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.ProductName)
         </td>
@@ -71,13 +82,14 @@
             @Html.DisplayFor(modelItem => item.Stock)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ProductId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ProductId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ProductId })
+            @Html.ActionLink("Edit", "Edit", new { id = item.ProductId }) |
+            @Html.ActionLink("Details", "Details", new { id = item.ProductId }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.ProductId })
         </td>
     </tr>
 }
     <tr>
+        <td><button type="submit">刪除</button></td>
         <td></td>
         <td><a href="@Url.Action("BatchUpdate")" class="btn">更新價格為5元</a></td>
         <td></td>
@@ -86,3 +98,5 @@
     </tr>
 
 </table>
+
+}
