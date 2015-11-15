@@ -64,5 +64,17 @@ namespace MVC5Course.Controllers
 
             return Json(data);
         }
+
+        public ActionResult MultBinding()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult MultBinding(Product data1, Product data2)
+        {
+            return View();
+        }
+
     }
 }
