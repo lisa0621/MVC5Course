@@ -25,7 +25,7 @@
 
     function MainCtrl($scope) {
         window.GetData = function () {
-            $.post('AR/JsonData', "", function (data) {
+            $.post('/AR/JsonData', "", function (data) {
                 console.log(data);
                 $scope.data = data;
                 $scope.$apply();
