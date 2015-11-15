@@ -115,10 +115,15 @@ namespace MVC5Course.Controllers
 
         [HttpPost]
         //public ActionResult Index(int[] ProductId, Product[] data)
-        public ActionResult Index(int[] ProductId, IList<Product> data)
+        //public ActionResult Index(int[] ProductId, IList<Product> data)
+        public ActionResult Index(int[] ProductId, FormCollection form)
         {
-            if (ModelState.IsValid)
+
+            IList<Product> data = new List<Product>();
+
+            if (TryUpdateModel <IList<Product>>(data, "data"))
             {
+           
                 if (data != null)
                 {
                     foreach (var item in data)
@@ -138,9 +143,10 @@ namespace MVC5Course.Controllers
                 }
 
                 repo.UnitOfWork.Commit();
+                return RedirectToAction("Index");
             }
 
-            return RedirectToAction("Index");
+            return View();
         }
 
         public ActionResult BatchUpdate()
