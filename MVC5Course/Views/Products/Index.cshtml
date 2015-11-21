@@ -134,7 +134,7 @@
                         {
                             @:停用
                         }*@
-                    @(data[i].Active.Value ? "啟用" : "停用")
+                    @*@(data[i].Active.Value ? "啟用" : "停用")*@
                 </td>
                 <td>
                     @Html.EditorFor(modelItem => data[i].Stock)

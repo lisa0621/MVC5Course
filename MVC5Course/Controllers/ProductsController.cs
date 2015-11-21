@@ -115,7 +115,7 @@ namespace MVC5Course.Controllers
             ViewBag.ProductName = new SelectList(plist, "ProductId", "ProductName");
 
 
-            var data = repo.All(true);
+            var data = repo.All(false);
             //var data = repo.Get取得前面10筆範例資料(active);
 
             if (!String.IsNullOrEmpty(search))

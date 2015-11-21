@@ -23,7 +23,14 @@
 {
     @:依據OrderStatus篩選：
     @Html.DropDownList("OrderStatus", null, "請選擇訂單狀態", new { onchange="this.form.submit();"})
-        <input type="submit" value="搜尋" />
+    @Html.CheckBox("test", true);
+
+    <div>
+       Id: @Html.Id("OrderStatus")<br />
+       Name: @Html.Name("OrderStatus")<br />
+       Value: @Html.Value("OrderStatus")
+    </div>
+
 }
 
     <table class="table">
