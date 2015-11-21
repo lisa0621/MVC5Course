@@ -13,12 +13,27 @@ namespace MVC5Course.Controllers
     public class OrderLinesController : Controller
     {
         private FabricsEntities db = new FabricsEntities();
+        OrderRepository orderRepo = RepositoryHelper.GetOrderRepository();
 
         // GET: OrderLines
-        public ActionResult Index(int productId)
+        public ActionResult Index(int productId, string OrderStatus)
         {
+            //var plist = orderRepo.All().GroupBy(x => x.OrderStatus).Select(g => g.Key);
+            var plist = db.OrderLine.GroupBy(x => x.Order.OrderStatus).Select(g => g.Key);
             var orderLine = db.OrderLine.Where(x => x.ProductId == productId);
-            return View(orderLine.ToList());
+
+            var list = from p in orderLine
+                       group p by p.Order.OrderStatus into g
+                       select g.Key;
+
+            ViewBag.OrderStatus = new SelectList(plist);
+
+            if (!String.IsNullOrEmpty(OrderStatus))
+            {
+                orderLine = orderLine.Where(x => x.Order.OrderStatus == OrderStatus);
+            }
+
+            return PartialView(orderLine.ToList());
         }
 
         // GET: OrderLines/Details/5

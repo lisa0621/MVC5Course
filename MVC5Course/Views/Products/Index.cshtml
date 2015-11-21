@@ -61,6 +61,18 @@
 
 @using (Html.BeginForm("Index", "Products", FormMethod.Get))
 {
+    @:Active:
+    <select name="active">
+        <option>N/A</option>
+        <option value="True"  selected="@(ViewBag.IsActive==true))">上架</option>
+        <option value="False" selected="@(ViewBag.IsActive==false))">下架</option>
+    </select>
+
+    @:依據產品名稱篩選：
+    @Html.DropDownList("ProductName","請選擇")
+
+    //@Html.DropDownList("ProductName",null, "請選擇", new { onchange = "this.form.submit();"})
+
     <input type="search" name="search" value="" placeholder="請輸入關鍵字" />
     <input type="submit" value="搜尋" />
 }

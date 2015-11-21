@@ -51,7 +51,7 @@ namespace MVC5Course.Controllers
 
         // GET: Products
         [OutputCache(Location = OutputCacheLocation.Server, Duration = 60)]
-        public ActionResult Index(string search)
+        public ActionResult Index(string search, string ProductName, bool? active = true)
         {
             //return View(db.Product.ToList());
             //var data = db.Product
@@ -100,10 +100,23 @@ namespace MVC5Course.Controllers
             //    data4 = data4.Where(x => x.ProductName.Contains(search));
             //}
 
-            
+
             //var data = db.Product.Where(x => x.ProductId < 10);
             //var data = repo.Where(x => x.ProductId < 10);
-            var data = repo.Get取得前面10筆範例資料();
+
+            ViewBag.IsActive = active;
+
+            //var plist = from p in repo.All(true)
+            //            group p by p.ProductName into g
+            //            select g.Key;
+            //ViewBag.ProductName = new SelectList(plist);
+
+            var plist = repo.All(true);
+            ViewBag.ProductName = new SelectList(plist, "ProductId", "ProductName");
+
+
+            var data = repo.All(true);
+            //var data = repo.Get取得前面10筆範例資料(active);
 
             if (!String.IsNullOrEmpty(search))
             {
@@ -197,7 +210,7 @@ namespace MVC5Course.Controllers
         }
 
         // GET: Products/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(int? id, string OrderStatus)
         {
             if (id == null)
             {
