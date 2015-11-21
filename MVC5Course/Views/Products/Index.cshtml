@@ -19,6 +19,16 @@
     ViewBag.Title = "Index";
 }
 
+@helper HtmlActionLink(string action)
+{
+    <a href="@Url.Action(action)">
+        <i class="img-circle"></i>
+        <span class="hidden-tablet">Forms</span>
+    </a>    
+}
+
+@HtmlActionLink("Create")
+
 <h2>Index</h2>
 
 <p>
