@@ -2,28 +2,54 @@
 @model IEnumerable<Product>
 
 @{
+
+    //if (IsAjax)
+    //{
+    //    Layout = "";
+
+    //}
+
+    //ViewContext.RouteData.Values["controller"]
+
+    //登入者
+    //User.Identity.Name
+    //已經登入
+    //User.Identity.IsAuthenticated
+
     ViewBag.Title = "Index";
 }
 
 <h2>Index</h2>
 
 <p>
+
+    @Html.ActionLink("Home", "Index", "Home",null , new { @class = "btn" })
+
+    <a class="logo" href="/Products/Create"></a>
+    <a class="logo" href="@Url.Action("Create")"></a>
+    @Html.ActionLink(" ", "Create", null, new { @class = "logo" })
+
+    <a class="btn" data-test="123" href="/Products/Create">Create New</a>
+    @Html.ActionLink("Create New", "Create", null, new { @class = "btn", data_test = "123" })
     @Html.ActionLink("Create New", "Create")
 </p>
 @*<p class="text-right">
-    @using (Html.BeginForm())
-        {
-        <input type="search" name="search" value="" placeholder="請輸入關鍵字"/>
-        @Html.TextBox("search");
-        <input type="submit" value="搜尋" />
-    }
-</p>*@
+        @using (Html.BeginForm())
+            {
+            <input type="search" name="search" value="" placeholder="請輸入關鍵字"/>
+            @Html.TextBox("search");
+            <input type="submit" value="搜尋" />
+        }
+    </p>*@
 
 <p class="text-right">
-       @Html.ActionLink("test", "ABC", new { id = 123 })
+    @Html.ActionLink("test", "ABC", new { id = 123 })
 </p>
 
-@using (Html.BeginForm("Index","Products",FormMethod.Get))
+@*@using (Html.BeginForm(ViewContext.RouteData.Values["action"].ToString(),
+    ViewContext.RouteData.Values["controller"].ToString(), FormMethod.Get)) { }*@
+
+@using (Html.BeginForm("Index", "Products", FormMethod.Get))
 {
     <input type="search" name="search" value="" placeholder="請輸入關鍵字" />
     <input type="submit" value="搜尋" />
@@ -58,7 +84,7 @@
             var data = Model.ToArray();
 
         }
-        @for (var i = 0; i < data.Length ; i++)
+        @for (var i = 0; i < data.Length; i++)
         {
 
             <tr>
@@ -99,7 +125,7 @@
                 </td>
             </tr>
         }
-        
+
         <tr>
             <td><button type="submit">批次作業</button></td>
             <td></td>
