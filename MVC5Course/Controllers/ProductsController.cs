@@ -286,7 +286,7 @@ namespace MVC5Course.Controllers
         //public ActionResult Edit([Bind(Include = "ProductId,ProductName,Price,Active,Stock")] Product product)
         {
             var product = repo.GetByID(id);
-            var includeProperties = "ProductId,ProductName,Price,Stock".Split(',');
+            var includeProperties = "ProductId,ProductName,Active,Price,Stock".Split(',');
             if (TryUpdateModel<Product>(product, includeProperties))
             //if (ModelState.IsValid)
             {

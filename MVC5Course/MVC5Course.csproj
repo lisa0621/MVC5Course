@@ -409,6 +409,8 @@
     <Content Include="Views\OrderLines\Index.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Product.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Product.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Boolean.是否啟用.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\BooleanActive.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
