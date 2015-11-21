@@ -121,7 +121,7 @@ namespace MVC5Course.Controllers
         //public ActionResult Index(int[] ProductId, IList<Product> data)
         public ActionResult Index(int[] ProductId, FormCollection form)
         {
-            throw new DbEntityValidationException();
+            //throw new DbEntityValidationException();
 
             IList<Product> data = new List<Product>();
 

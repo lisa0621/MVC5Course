@@ -4,9 +4,52 @@
 <h2>@ViewBag.Title.</h2>
 <h3>@ViewBag.Message</h3>
 
-<p>Use this area to provide additional information.</p>
+
+@*@Utility.displayEnable(ViewBag.IsEnabled);*@
+
+@display啟用停用(ViewBag.IsEnabled)
+
+@CommonBlock()
+
+@CommonBlock().ToHtmlString();
+
+@Html.Raw(@CommonBlock().ToHtmlString());
 
 
 @section footer{
-    <p>&copy; @DateTime.Now.Year - SHA 應用程式</p>
+    <p>&copy; @DateTime.Now.Year - SHA 應用程式  @GetDate()</p>
 }
+
+@helper CommonBlock()
+{
+    <p>Use this area to provide additional information.</p>
+}
+
+@helper display啟用停用(bool status)
+{
+    
+    if (status)
+    {
+        @:啟用
+    }
+    else
+    {
+        @:停用
+    }
+}
+
+@functions {
+
+    public int MyID { get; set; }
+
+    public IHtmlString GetDate()
+    {
+        return new HtmlString(DateTime.Now.ToString());
+    }
+}
+
+@*
+權限檢查
+@if (PermissionCheck(User.Identity.Name))
+{
+}*@

@@ -1,0 +1,57 @@
+﻿@model MVC5Course.Models.NewProductVM
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+@ViewData["MyName"]
+<hr />
+@ViewBag.MyTitle
+
+<hr />
+<table class="table">
+    <tr>
+        <td>商品編號</td>
+        <td>商品名稱</td>
+        <td>商品價格</td>
+    </tr>
+
+    @foreach (var item in (List<MVC5Course.Models.Product>)ViewBag.Products)
+    { 
+        <tr>
+            <td>@item.ProductId</td>
+            <td>@item.ProductName</td>
+            <td>@item.Price</td>
+        </tr>
+    }
+</table>
+
+<hr />
+<div>
+    <h4>NewProductVM</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
