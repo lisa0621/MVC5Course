@@ -44,6 +44,30 @@
 
     </dl>
 </div>
+
+@*<h2>Order Lines</h2>
+
+<table>
+    <tr>
+        <th>Qty</th>
+        <th>LineNumber</th>
+        <th>LineTotal</th>
+    </tr>
+    @foreach (var item in Model.OrderLine)
+    {
+        <tr>
+            <td>@item.Qty</td>
+            <td>@item.LineNumber</td>
+            <td>@item.LineTotal</td>
+        </tr>
+    }
+
+</table>*@
+
+@*@Html.Partial("OrderLines", Model.OrderLine)*@
+
+@Html.Action("OrderLines", new { Model.ProductId})
+
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.ProductId }) |
     @Html.ActionLink("Back to List", "Index")

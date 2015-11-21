@@ -215,6 +215,13 @@ namespace MVC5Course.Controllers
             return View(product);
         }
 
+        //[ChildActionOnly]
+        public ActionResult OrderLines(int id)
+        {
+            return View(repo.GetByID(id).OrderLine);
+        }
+
+
         // GET: Products/Create
         public ActionResult Create()
         {
