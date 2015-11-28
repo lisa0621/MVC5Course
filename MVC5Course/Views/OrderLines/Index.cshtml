@@ -1,7 +1,9 @@
 ﻿@model IEnumerable<MVC5Course.Models.OrderLine>
 
 @{
-    Layout = null;
+    if (IsAjax) {
+        Layout = null;
+    }
 }
 
 <!DOCTYPE html>
@@ -19,17 +21,19 @@
     }*@
 
    
-@using (Html.BeginForm())
+@using (Ajax.BeginForm("Index", "OrderLines", new { productId = ViewBag.productId }, new AjaxOptions { UpdateTargetId = "details" }))
 {
-    @:依據OrderStatus篩選：
-    @Html.DropDownList("OrderStatus", null, "請選擇訂單狀態", new { onchange="this.form.submit();"})
-    @Html.CheckBox("test", true);
-
     <div>
+        依據OrderStatus篩選：
+        @Html.DropDownList("OrderStatus", null, "請選擇訂單狀態")
+        @Html.CheckBox("test", true);
+        <input type="submit" value="開始篩選"/>
+    </div>
+    @*<div>
        Id: @Html.Id("OrderStatus")<br />
        Name: @Html.Name("OrderStatus")<br />
        Value: @Html.Value("OrderStatus")
-    </div>
+    </div>*@
 
 }
 

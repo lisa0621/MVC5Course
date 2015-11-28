@@ -18,6 +18,8 @@ namespace MVC5Course.Controllers
         // GET: OrderLines
         public ActionResult Index(int productId, string OrderStatus)
         {
+            ViewBag.productId = productId;
+
             //var plist = orderRepo.All().GroupBy(x => x.OrderStatus).Select(g => g.Key);
             var plist = db.OrderLine.GroupBy(x => x.Order.OrderStatus).Select(g => g.Key);
             var orderLine = db.OrderLine.Where(x => x.ProductId == productId);
