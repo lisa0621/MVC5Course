@@ -2,7 +2,9 @@
 @using PagedList.Mvc
 @using PagedList;
 
+
 @{
+    if (IsAjax) { Layout = ""; }
     ViewBag.Title = "Index";
 }
 
@@ -52,4 +54,12 @@
 
 </table>
 
-@Html.PagedListPager(Model as IPagedList<Product>, (p) =>Url.Action("Index", new { pageNumber = p}));
+@Html.PagedListPager(Model as IPagedList<Product>, 
+    (p) =>Url.Action("Index", new { pageNumber = p, keyword = "揶"}),
+    PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing("#Main"))
+
+<a href="/?keyword=@Url.Encode("測試")">測試</a>
+
+<script type="text/javascript">
+    var lastError = '';
+</script>

@@ -33,13 +33,14 @@
         </div>
     </div>
     <div class="container body-content">
-        <div id="main"></div>
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - 我的 ASP.NET 應用程式</p>
-        </footer>
-    </div>
+            <section class="content-wrapper main-content clear-fix" id="Main">
+                @RenderBody()
+            </section>
+            <hr />
+            <footer>
+                <p>&copy; @DateTime.Now.Year - 我的 ASP.NET 應用程式</p>
+            </footer>
+</div>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
