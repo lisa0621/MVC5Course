@@ -29,3 +29,30 @@
         <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
     </div>
 </div>
+
+<div id="map"></div>
+
+
+@section Scripts {
+<script>
+            var map;
+            function initMap() {
+                map = new google.maps.Map(document.getElementById('map'), {
+                    center: { lat: 25.043654, lng: 121.526061 },
+                    zoom: 8
+                });
+            };
+
+
+
+            $(document).ready(function () {
+
+                initMap();
+
+
+            });
+
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC2s4YPihahyCr2rIGZ97-dUQllkEgb-vU&callback=initMap"
+        async defer></script>
+    }

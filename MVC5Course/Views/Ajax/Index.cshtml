@@ -1,0 +1,7 @@
+﻿@Html.ActionLink("取得時間","GetTime")
+<p>
+    @Ajax.ActionLink("取得時間", "GetTime", new
+    AjaxOptions(){ UpdateTargetId = "now" })
+</p>
+
+<div id="now"></div>
