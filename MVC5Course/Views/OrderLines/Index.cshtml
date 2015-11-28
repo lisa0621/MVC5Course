@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<MVC5Course.Models.OrderLine>
 
-@{
+@*@{
     if (IsAjax) {
         Layout = null;
     }
-}
+}*@
 
 <!DOCTYPE html>
 
@@ -73,8 +73,21 @@
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
                     @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                    @*@Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
+                    @Ajax.ActionLink("Delete", "Delete",
+                   new
+                   {
+                       OrderId = item.OrderId,
+                       LineNumber = item.LineNumber,
+                       OrderStatus = ViewBag.OrderStatusSelected
+                   },
+                   new AjaxOptions
+                   {
+                       UpdateTargetId ="details",
+                       HttpMethod = "POST"
+                   })
                 </td>
+
             </tr>
         }
 
