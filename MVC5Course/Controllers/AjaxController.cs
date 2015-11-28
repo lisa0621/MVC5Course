@@ -14,6 +14,7 @@ namespace MVC5Course.Controllers
             return View();
         }
 
+        [OutputCache(NoStore =true, Duration =0)]
         public String GetTime()
         {
             return DateTime.Now.ToString("yyyy-MM-dd HH::mm:ss:ffff");

@@ -1,7 +1,11 @@
-﻿@Html.ActionLink("取得時間","GetTime")
+﻿@Html.ActionLink("取得時間", "GetTime")
 <p>
-    @Ajax.ActionLink("取得時間", "GetTime", new
-    AjaxOptions(){ UpdateTargetId = "now" })
+    @Ajax.ActionLink("取得時間", "GetTime",
+    new AjaxOptions()
+    {
+        UpdateTargetId = "now",
+        AllowCache = true
+    })
 </p>
 
 <div id="now"></div>
