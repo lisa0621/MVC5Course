@@ -25,9 +25,10 @@
 {
     <div>
         依據OrderStatus篩選：
-        @Html.DropDownList("OrderStatus", null, "請選擇訂單狀態")
-        @Html.CheckBox("test", true);
-        <input type="submit" value="開始篩選"/>
+        @*@Html.DropDownList("OrderStatus", null, "請選擇訂單狀態")*@
+        @Html.DropDownList("OrderStatus", null, "請選擇訂單狀態", new { onchange = "$(this.form).trigger('submit');" })
+        @*@Html.CheckBox("test", true);*@
+        @*<input type="submit" value="開始篩選"/>*@
     </div>
     @*<div>
        Id: @Html.Id("OrderStatus")<br />
