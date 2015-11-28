@@ -28,7 +28,7 @@ namespace MVC5Course.Controllers
                        group p by p.Order.OrderStatus into g
                        select g.Key;
 
-            ViewBag.OrderStatus = new SelectList(list);
+            ViewBag.OrderStatus = new SelectList(plist);
             ViewBag.OrderStatusSelected = OrderStatus;
 
             if (!String.IsNullOrEmpty(OrderStatus))
