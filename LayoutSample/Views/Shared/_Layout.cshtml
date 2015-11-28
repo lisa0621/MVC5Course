@@ -404,7 +404,11 @@
     </footer>
 
     <!-- start: JavaScript-->
-    <script src="~/js/jquery-1.9.1.min.js"></script>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/Bootstrap_Metro_Dashboard_JS")
+
+    @*<script src="~/js/jquery-1.9.1.min.js"></script>
     <script src="~/js/jquery-migrate-1.0.0.min.js"></script>
 
     <script src="~/js/jquery-ui-1.10.0.custom.min.js"></script>
@@ -455,7 +459,7 @@
     <script src="~/js/counter.js"></script>
 
     <script src="~/js/retina.js"></script>
-    <script src="~/js/custom.js"></script>
+    <script src="~/js/custom.js"></script>*@
     <!-- end: JavaScript-->
 
 </body>
